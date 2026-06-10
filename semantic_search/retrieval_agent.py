@@ -31,8 +31,8 @@ class RetrievalAgent:
         if not isinstance(output["retrieved_documents"], list):
             raise ValueError("retrieved_documents must be a list")
 
-        if output["execution_time"] <= 0:
-            raise ValueError("execution_time must be positive")
+        if output["execution_time"] < 0:
+            raise ValueError("execution_time must be non-negative")
 
         for doc in output["retrieved_documents"]:
             required_doc_keys = ["content", "source", "distance", "confidence"]
