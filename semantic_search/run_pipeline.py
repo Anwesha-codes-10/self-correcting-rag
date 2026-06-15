@@ -1,6 +1,7 @@
 from retrieval_agent import RetrievalAgent
 from relevance_filter import RelevanceFilter
 from generator import Generator
+from fact_checker import FactChecker
 
 from embeddings_real import (
     load_documents,
@@ -32,6 +33,8 @@ def main():
 
     agent3 = Generator()
 
+    agent4 = FactChecker()
+
     query = input(
         "\nAsk a question: "
     )
@@ -52,6 +55,22 @@ def main():
     result3 = agent3.execute(result2)
     print(
         f"Generated answer:\n{result3['generated_answer']}\n"
+    )
+
+    print("\n--- AGENT 4 ---")
+    result4 = agent4.execute(
+        result3,
+        result2
+    )
+   
+    print(
+        f"Grounded: "
+        f"{result4['is_grounded']}"
+    )
+
+    print(
+        f"Confidence: "
+        f"{result4['confidence']:.2f}"
     )
 
     print("Sources:")
