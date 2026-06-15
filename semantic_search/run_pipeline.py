@@ -1,5 +1,6 @@
 from retrieval_agent import RetrievalAgent
 from relevance_filter import RelevanceFilter
+from generator import Generator
 
 from embeddings_real import (
     load_documents,
@@ -29,6 +30,8 @@ def main():
         relevance_threshold=0.4
     )
 
+    agent3 = Generator()
+
     query = input(
         "\nAsk a question: "
     )
@@ -44,6 +47,16 @@ def main():
     print(
         f"Filtered to {result2['num_filtered']} relevant documents\n"
     )
+
+    print("\n--- AGENT 3 ---")
+    result3 = agent3.execute(result2)
+    print(
+        f"Generated answer:\n{result3['generated_answer']}\n"
+    )
+
+    print("Sources:")
+    for source in result3["sources"]:
+        print(source)
 
     for i, doc in enumerate(
         result2["filtered_documents"],
