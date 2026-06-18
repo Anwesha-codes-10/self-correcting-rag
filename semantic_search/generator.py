@@ -21,9 +21,10 @@ class Generator:
                 doc["content"]
             )
 
-        generated_answer = "\n\n".join(
-            answer
+        generated_answer = (
+            f"Question: {query}\n\n"+ "\n\n".join(answer[:2])
         )
+        
 
         output = {
             "query": query,
