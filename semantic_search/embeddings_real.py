@@ -93,6 +93,24 @@ def query_documents(
         )
     )
 
+def setup_resources():
+
+    docs, doc_ids = load_documents(
+        "data/FastAPI_and_Scikit-learn_Technical_Guide.pdf"
+    )
+
+    model, embeddings = create_embeddings(
+        docs
+    )
+
+    collection = create_chroma_collection(
+        docs,
+        embeddings,
+        doc_ids
+    )
+
+    return collection, model
+
 
 def main():
 
