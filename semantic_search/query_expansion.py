@@ -34,11 +34,19 @@ Rules:
         for line in output_text.split("\n"):
             line = line.strip()
 
+            if not line:
+                continue
+
+            if len(line) > 2 and line[0].isdigit() and line[1] == ".":
+                line = line[3:].strip()
+
             if line:
                 variations.append(line)
 
         queries = [query]
 
         queries.extend(variations[:2])
-
+        
+        while len(queries) < 3:
+            queries.append(query)
         return queries
